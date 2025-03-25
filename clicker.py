@@ -12,34 +12,64 @@ time.sleep(0.2)
 # Get clipboard content
 clipboard_content = pyperclip.paste().strip()
 
+i=0
+
 while(clipboard_content):  # While there is content in the clipboard
-
-    i=0
-
-    # Stop if the copied content is empty
-    if not clipboard_content:
-        print("Empty cell detected. Stopping...")
-        break
-
+    
     # Switch to Firefox
     pg.hotkey("alt", "tab")
     time.sleep(0.2)
 
-    # Page Down
-    #pg.press("pgdn")
+    
+    #iterations
+    
 
-    # Click the "Input box button twice" button (adjust these coordinates)
-    pg.click(x=1153, y=966)  # Replace with actual button coordinates
-    pg.click(x=1153, y=966)  # Replace with actual button coordinates
+    if(i==0):
+        # click product
+        pg.click(x=1004, y=610)  
+        time.sleep(0.2)
+        # Page Down
+        pg.press("pgdn")
+        time.sleep(0.2)
+        # Click change
+        pg.click(x=1506, y=531)  
+        time.sleep(0.2)
+
+
+    #Click the input box
+    pg.click(x=686, y=597)
+    pg.click(x=686, y=597)    
     time.sleep(0.2)
 
+      
     # Paste the copied value
     pg.hotkey("ctrl", "v")
-    time.sleep(0.2)
+    time.sleep(0.1)
 
-    # Click the "Add Value" button (adjust these coordinates)
-    pg.click(x=1386, y=961)  # Replace with actual button coordinates
+    pg.press("enter")
+    time.sleep(1)
+
+    # Click the "Add Value" button 
+    pg.click(x=1075, y=650)  
     time.sleep(0.2)
+    i=i+1
+
+    
+
+    # If gets to 20 then reset to 0, this is when it should save draft
+    if(i==20):
+
+        i=0
+        #click save changes
+        pg.click(x=1585, y=1029)
+        time.sleep(0.2)
+
+        pg.press("end")
+        time.sleep(0.2)
+
+        # Click "Save Draft" button in Firefox (adjust coordinates)
+        pg.click(x=2185, y=1300)  
+        time.sleep(0.2)
 
     # Switch back to Excel
     pg.hotkey("alt", "tab")
@@ -55,12 +85,4 @@ while(clipboard_content):  # While there is content in the clipboard
 
     clipboard_content = pyperclip.paste().strip()
 
-    # If gets to 20 then reset to 0, this is when it should save draft
-    if(i==20):
-        i=0
 
-# Click "Save Draft" button in Firefox (adjust coordinates)
-#pg.hotkey("alt", "tab")
-#time.sleep(1)
-#pg.click(x=600, y=500)  # Replace with actual coordinates
-#print("Process completed!")
