@@ -20,11 +20,11 @@ while(clipboard_content):  # While there is content in the clipboard
     pg.hotkey("alt", "tab")
     time.sleep(0.2)
 
-    
-    #iterations
-    
 
     if(i==0):
+        #home
+        pg.press("home")
+            
         # click product
         pg.click(x=1004, y=610)  
         time.sleep(0.2)
@@ -54,23 +54,6 @@ while(clipboard_content):  # While there is content in the clipboard
     time.sleep(0.2)
     i=i+1
 
-    
-
-    # If gets to 20 then reset to 0, this is when it should save draft
-    if(i==20):
-
-        i=0
-        #click save changes
-        pg.click(x=1585, y=1029)
-        time.sleep(0.2)
-
-        pg.press("end")
-        time.sleep(0.2)
-
-        # Click "Save Draft" button in Firefox (adjust coordinates)
-        pg.click(x=2185, y=1300)  
-        time.sleep(0.2)
-
     # Switch back to Excel
     pg.hotkey("alt", "tab")
     time.sleep(0.2)
@@ -84,5 +67,19 @@ while(clipboard_content):  # While there is content in the clipboard
     time.sleep(0.2)
 
     clipboard_content = pyperclip.paste().strip()
+
+
+    # If gets to 20 then reset to 0, this is when it should save draft
+    if i == 40 or not clipboard_content:
+        time.sleep(1)
+        i = 0
+        # Click save changes
+        pg.click(x=1580, y=1085)
+        pg.click(x=1581, y=1084)
+        time.sleep(3)
+
+        
+
+    
 
 
